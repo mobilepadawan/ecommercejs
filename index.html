@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda : Mandalefruta.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/fruit.png" type="image/png">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script type="module" src="js/dom.js"></script>
+</head> 
+<body>
+    <img id="carrito" class="imagen" src="images/shopping-cart.png" alt="Carrito de Frutas">
+    <h1 data-atributo="valor que yo quiera" id="titulo">mandalefruta.com</h1>
+    <p id="parrafo" class="text-blue">Tu tienda dulce, sana y natural.</p>
+
+    <search>
+        <input type="search" placeholder="Ingresa parte del nombre a buscar">
+        <p>Filtros rápidos:</p>
+        <div class="filtros">
+
+        </div>
+    </search>
+
+    <div id="contenedor" class="container">
+
+    </div>
+    <dialog id="modal-background">
+        <h2>Carrito</h2>
+        <table>
+            <tbody>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td>TOTAL:</td>
+                    <td id="totalProductos">$ 1234.00</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="centrar">
+            <button id="cerrarModalCarrito" class="button button-outline">CANCELAR</button>
+            <button id="confirmarCarrito" class="button">CONFIRMAR</button>
+        </div>
+    </dialog>
+    
+    <div id="flechaArriba" class="ocultar">
+        <img src="images/up-arrow.png" title="Ir arriba" alt="Ir arriba">
+    </div>
+    <div class="centrar">
+        <a href="backoffice.html">Backoffice</a>
+        <a href="setup.html">Setup</a>
+    </div>
+</body>
+</html>
