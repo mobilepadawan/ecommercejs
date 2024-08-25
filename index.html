@@ -2,55 +2,52 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Tienda : Mandalefruta.com</title>
+    <title>Mandalefruta.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/fruit.png" type="image/png">
-    <link rel="stylesheet" href="css/estilos.css">
-    <script type="module" src="js/dom.js"></script>
-</head> 
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="module" src="js/main.js"></script>
+</head>
 <body>
-    <img id="carrito" class="imagen" src="images/shopping-cart.png" alt="Carrito de Frutas">
-    <h1 data-atributo="valor que yo quiera" id="titulo">mandalefruta.com</h1>
-    <p id="parrafo" class="text-blue">Tu tienda dulce, sana y natural.</p>
-
-    <search>
-        <input type="search" placeholder="Ingresa parte del nombre a buscar">
-        <p>Filtros rápidos:</p>
-        <div class="filtros">
-
+    <header>
+        <div class="header">
+            <div class="titles">
+                <h1>mandalefruta.com</h1>
+                <h2>Tu tienda sana y natural.</h2>
+            </div>
+            <div class="shoping-cart">
+                <img src="images/shopping-cart-32.png" alt="Carrito">
+            </div>
         </div>
-    </search>
+    </header>
+    <main>
+        <article>
+            <search class="search-bar">
+                <input type="search" id="inputSearch" autocomplete="off" placeholder="Producto a buscar... 🔎">
+            </search>
+        </article>
+        <article class="categories">
+            <span class="category">Todos</span>
+        </article>
+        <article>
+            <div class="card-container">
 
-    <div id="contenedor" class="container">
+            </div>
+        </article>
+    </main>
+    <footer>
+        <div class="footer">
+            <h3>Copyright © 2023 - <span>2024</span> | Fernando Luna para Teclab</h3>
 
-    </div>
-    <dialog id="modal-background">
-        <h2>Carrito</h2>
-        <table>
-            <tbody>
-
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td>TOTAL:</td>
-                    <td id="totalProductos">$ 1234.00</td>
-                    <td></td>
-                </tr>
-            </tfoot>
-        </table>
-        <div class="centrar">
-            <button id="cerrarModalCarrito" class="button button-outline">CANCELAR</button>
-            <button id="confirmarCarrito" class="button">CONFIRMAR</button>
+            <div class="links">
+                <a href="setup.html">Setup</a>
+                <a href="backoffice.html">Backoffice</a>
+            </div>
         </div>
-    </dialog>
-    
-    <div id="flechaArriba" class="ocultar">
+    </footer>
+    <div id="arrow-up" class="arrow-style hide-arrow">
         <img src="images/up-arrow.png" title="Ir arriba" alt="Ir arriba">
     </div>
-    <div class="centrar">
-        <a href="backoffice.html">Backoffice</a>
-        <a href="setup.html">Setup</a>
-    </div>
 </body>
+
 </html>
