@@ -24,11 +24,10 @@ function cargarProductos() {
 }
 
 function mostrarTotalCarrito() {
-    if (carrito.length > 0) {
-        let totalCarrito = carrito.reduce((acc, prod)=> acc + prod.precio, 0)
-        totalCarrito > 0 ? totalCarrito : 0.00
-        precioTotal.textContent = `$ ${totalCarrito.toLocaleString('es-AR')}`
-    }
+    let totalCarrito = 0
+    totalCarrito = carrito.length > 0 ? carrito.reduce((acc, prod)=> acc + prod.precio, 0)
+                                      : 0
+    precioTotal.textContent = `$ ${totalCarrito.toLocaleString('es-AR')}`
 }
 
 cargarProductos() // FUNCIÓN PRINCIPAL
