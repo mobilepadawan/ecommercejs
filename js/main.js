@@ -51,7 +51,7 @@ function mostrarCategorias(arrayCategorias) {
 }
 
 function recuperarCategorias(arrayProductos) {
-    if (arrayProductos[0] !== undefined) {
+    if (arrayProductos[0]?.categoria) {
         const categoriasUnicas = new Set(...[arrayProductos.map((producto)=> producto?.categoria)])
         categorias.push(...categoriasUnicas)
     }
