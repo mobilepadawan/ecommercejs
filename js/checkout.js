@@ -17,6 +17,7 @@ function cargarProductos() {
         tableBody.innerHTML = productos
         mostrarTotalCarrito()
         crearEventoClicEliminarProducto()
+        btnComprar.removeAttribute('disabled')
     } else {
         mostrarToast('alert', 'No hay productos para comprar.')
     }
@@ -55,4 +56,6 @@ btnComprar.addEventListener('click', ()=> {
     alert('✅ Compra confirmada! Gracias por elegirnos.\n🏠 Enviaremos el pedido al domicilio declarado.\n\nLo esperamos pronto por aquí.')
     tableBody.innerHTML = ''
     mostrarTotalCarrito()
+    almacenarCarrito()
+    btnComprar.setAttribute('disabled', 'true')
 })
