@@ -54,6 +54,7 @@ btnRetornar.addEventListener('click', ()=> location.href = 'index.html')
 btnComprar.addEventListener('click', ()=> {
     alert('✅ Compra confirmada! Gracias por elegirnos.\n🏠 Enviaremos el pedido al domicilio declarado.\n\nLo esperamos pronto por aquí.')
     tableBody.innerHTML = ''
+    carrito.length = 0
     mostrarTotalCarrito()
     almacenarCarrito()
     btnComprar.setAttribute('disabled', 'true')
