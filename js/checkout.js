@@ -14,19 +14,21 @@ function cargarProductos() {
     if (carrito.length > 0) {
         let productos = ''
         carrito.forEach((producto)=> productos += retornarFilaCheckout(producto) )
-        tableBody.innerHTML = productos
+        tableBody.innerHTML = productos || retornarFilaCheckout()
         mostrarTotalCarrito()
         crearEventoClicEliminarProducto()
         btnComprar.removeAttribute('disabled')
     } else {
+        tableBody.innerHTML = retornarFilaCheckout()
         mostrarToast('alert', 'No hay productos para comprar.')
     }
 }
 
 function mostrarTotalCarrito() {
     let totalCarrito = 0
+
     totalCarrito = carrito.length > 0 ? carrito.reduce((acc, prod)=> acc + prod.precio, 0)
-                                      : 0
+                                      : 0.00
     precioTotal.textContent = `$ ${totalCarrito.toLocaleString('es-AR')}`
 }
 
@@ -53,7 +55,7 @@ btnRetornar.addEventListener('click', ()=> location.href = 'index.html')
 
 btnComprar.addEventListener('click', ()=> {
     alert('✅ Compra confirmada! Gracias por elegirnos.\n🏠 Enviaremos el pedido al domicilio declarado.\n\nLo esperamos pronto por aquí.')
-    tableBody.innerHTML = ''
+    tableBody.innerHTML = retornarFilaCheckout()
     carrito.length = 0
     mostrarTotalCarrito()
     almacenarCarrito()
