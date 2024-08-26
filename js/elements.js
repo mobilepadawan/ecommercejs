@@ -1,8 +1,10 @@
+import { formatearImporte } from "./general.js"
+
 export function retornarCardHTML(producto) {
     return `<div class="card">
                 <div class="product-image">${producto.imagen}</div>
                 <div class="product-name">${producto.nombre}</div>
-                <div class="product-price">$ ${producto.precio}</div>
+                <div class="product-price">${formatearImporte(producto.precio)}</div>
                 <div class="buy-button"><button id="buttonComprar" data-codigo="${producto.id}">COMPRAR</button></div>
             </div>`
 }
@@ -32,7 +34,7 @@ export function retornarFilaCheckout(producto) {
     return `<tr>
                 <td id="pImagen">${producto?.imagen || ''}</td>
                 <td id="nombre">${producto?.nombre || ''}</td>
-                <td id="price">$ ${producto?.precio || '0.00'}</td>
+                <td id="price">${formatearImporte(producto?.precio || 0.00)}</td>
                 <td id="delButton" 
                     data-codigo="${producto?.id || ''}" 
                     title="Clic para eliminar">⛔️</td>
