@@ -45,7 +45,7 @@ function mostrarProductos(arrayProductos) {
 }
 
 function mostrarCategorias(arrayCategorias) {
-    if (Array.isArray(arrayCategorias)) {
+    if (Array.isArray(arrayCategorias) && arrayCategorias[0]?.categoria !== undefined) {
         let spanCategorias = ''
         arrayCategorias.forEach((categoria)=> spanCategorias += retornarItemCategoria(categoria))
         seccionCategorias.innerHTML += spanCategorias
