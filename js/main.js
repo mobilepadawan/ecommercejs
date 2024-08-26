@@ -1,8 +1,6 @@
 // IMPORTS
-import { retornarCardHTML, retornarCardError, 
-         retornarItemCategoria } from './elements.js'
-import { obtenerURLendpoint, validarURL, almacenarCarrito, 
-         recuperarCarrito, mostrarToast } from './general.js'
+import { retornarCardHTML, retornarCardError, retornarItemCategoria } from './elements.js'
+import { obtenerURLendpoint, validarURL, almacenarCarrito, recuperarCarrito, mostrarToast } from './general.js'
 
 // DOM: enlaces y variables globales
 const categorias = []
