@@ -25,6 +25,7 @@ function cargarProductos() {
 function mostrarTotalCarrito() {
     if (carrito.length > 0) {
         let totalCarrito = carrito.reduce((acc, prod)=> acc + prod.precio, 0)
+        totalCarrito > 0 ? totalCarrito : 0.00
         precioTotal.textContent = `$ ${totalCarrito.toLocaleString('es-AR')}`
     }
 }
@@ -52,5 +53,6 @@ btnRetornar.addEventListener('click', ()=> location.href = 'index.html')
 
 btnComprar.addEventListener('click', ()=> {
     alert('✅ Compra confirmada! Gracias por elegirnos.\n🏠 Enviaremos el pedido al domicilio declarado.\n\nLo esperamos pronto por aquí.')
-
+    tableBody.innerHTML = ''
+    mostrarTotalCarrito()
 })
