@@ -1,3 +1,5 @@
+import ToastIt from './toastitv1.0-min.js'
+
 export function obtenerURLendpoint() {
     return localStorage.getItem('URLEndpoint') || 'Error'
 }
@@ -21,4 +23,13 @@ export function validarURL(urlString) {
     } catch (e) {
         return false
     }
+}
+
+export function mostrarToast(estilo, mensaje) {
+    ToastIt.now({
+        close: true,
+        style: estilo,
+        timer: 3000,
+        message: mensaje
+    })
 }

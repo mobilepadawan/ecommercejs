@@ -1,13 +1,15 @@
 // IMPORTS
-import { retornarCardHTML, retornarCardError, retornarItemCategoria } from './elements.js'
-import { obtenerURLendpoint, validarURL, almacenarCarrito, recuperarCarrito } from './general.js'
+import { retornarCardHTML, retornarCardError, 
+         retornarItemCategoria } from './elements.js'
+import { obtenerURLendpoint, validarURL, almacenarCarrito, 
+         recuperarCarrito, mostrarToast } from './general.js'
 
 // DOM: enlaces y variables globales
 const categorias = []
 const productos = []
 const carrito = recuperarCarrito()
-const container = document.querySelector('div.card-container')
 const seccionCategorias = document.querySelector('article.categories')
+const container = document.querySelector('div.card-container')
 const buttonCarrito = document.querySelector('div.shoping-cart')
 const inputSearch = document.querySelector('input#inputSearch')
 const arrowUp = document.querySelector('div.arrow-style')
@@ -71,7 +73,8 @@ inputSearch.addEventListener('keydown', (e)=> {
 
     if (e.key === 'Enter' && nombreAbuscar !== '') {        
         let arrayResultado = productos.filter((producto)=> producto.nombre.toLowerCase().includes(nombreAbuscar))
-        arrayResultado.length > 0 && mostrarProductos(arrayResultado)
+        arrayResultado.length > 0 ? mostrarProductos(arrayResultado)
+                                  : mostrarToast('alert', 'No se encontraron resultados.')
         arrayResultado = null
     }
 })
@@ -81,33 +84,36 @@ inputSearch.addEventListener('input', ()=> { // restaura productos al borrar la 
 })
 
 function agregarClicEnCategorias() {
-    seccionCategorias.addEventListener('click', (e)=> {
-        let link = e.target
-        if (link.className === 'category') {
-            if (link.textContent === 'Todos') {
-                mostrarProductos(productos)
-            } else {
-                const productosFiltrados = productos.filter((producto)=> producto.categoria === link.textContent)
-                productosFiltrados.length > 0 && mostrarProductos(productosFiltrados)
-            }
-        }
-        link = null
-        return 
-    })
+    const listadoCategorias = document.querySelectorAll('span.category')
+    if (listadoCategorias.length > 0) {
+        listadoCategorias.forEach((categoria)=> {
+            categoria.addEventListener('click', ()=> {
+                let link = categoria.textContent
+                if (link === 'Todos') {
+                    mostrarProductos(productos)
+                } else {
+                    const productosFiltrados = productos.filter((producto)=> producto.categoria === link)
+                    productosFiltrados.length > 0 && mostrarProductos(productosFiltrados)
+                }
+            })
+        })
+    }
 }
 
 function agregarClicEnBotones() {
-    container.addEventListener('click', (e)=> {
-        let button = e.target
-        if (button.id === 'buttonComprar') {
-            let codigoProducto = button.dataset.codigo
-            let productoSeleccionado = productos.find((producto)=> producto.id === codigoProducto)
-            carrito.push(productoSeleccionado)
-            almacenarCarrito(carrito)
-        }
-        button = null
-        return 
-    })
+    const botonesComprar = document.querySelectorAll('button#buttonComprar')
+    
+    if (botonesComprar.length > 0) {
+        botonesComprar.forEach((button)=> {
+            button.addEventListener('click', ()=> {
+                let codigoProducto = button.dataset.codigo
+                let prod = productos.find((producto)=> producto.id === codigoProducto)
+                carrito.push(prod)
+                almacenarCarrito(carrito)
+                mostrarToast('success', `'${prod.nombre}' se agregó al carrito.`)    
+            })
+        })
+    }
 }
 
 document.addEventListener('scroll', ()=> {

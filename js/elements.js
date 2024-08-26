@@ -27,3 +27,14 @@ export function retornarCardError() {
 export function retornarItemCategoria(categoria) {
     return `<span class="category">${categoria}</span>`
 }
+
+export function retornarFilaCheckout(producto) {
+    return `<tr>
+                <td id="pImagen">${producto.imagen}</td>
+                <td id="nombre">${producto.nombre}</td>
+                <td id="price">$ ${producto.precio}</td>
+                <td id="delButton" 
+                    data-codigo="${producto.id}" 
+                    title="Clic para eliminar">⛔️</td>
+            </tr>`
+}
