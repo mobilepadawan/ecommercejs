@@ -30,11 +30,11 @@ export function retornarItemCategoria(categoria) {
 
 export function retornarFilaCheckout(producto) {
     return `<tr>
-                <td id="pImagen">${producto.imagen}</td>
-                <td id="nombre">${producto.nombre}</td>
-                <td id="price">$ ${producto.precio}</td>
+                <td id="pImagen">${producto?.imagen || ''}</td>
+                <td id="nombre">${producto?.nombre || ''}</td>
+                <td id="price">$ ${producto?.precio || '0.00'}</td>
                 <td id="delButton" 
-                    data-codigo="${producto.id}" 
+                    data-codigo="${producto?.id || ''}" 
                     title="Clic para eliminar">⛔️</td>
             </tr>`
 }
