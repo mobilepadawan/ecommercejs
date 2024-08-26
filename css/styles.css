@@ -482,6 +482,14 @@ footer {
     }
 }
 
+button:disabled,
+button:disabled:hover,
+button:disabled:active {
+    opacity: .5;
+    filter: brightness(1);
+    transform: scale(1);
+}
+
 .arrow-style {
     position: fixed;
     bottom: 10px;
