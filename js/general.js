@@ -1,5 +1,19 @@
 import ToastIt from './toastitv1.0-min.js'
 
+export function formatearImporte(valor) {
+    const opciones = {
+        style: 'currency',
+        currency: 'ARS',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }
+
+    const formateador = new Intl.NumberFormat(undefined, opciones)
+    const valorFormateado = formateador.format(valor)
+
+    return valorFormateado
+}
+
 export function obtenerURLendpoint() {
     return localStorage.getItem('URLEndpoint') || 'Error'
 }
