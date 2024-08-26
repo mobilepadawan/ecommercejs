@@ -113,6 +113,22 @@ body {
     }
 }
 
+.loader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+    height: 400px;
+
+    & img {
+        margin: 0 auto;
+        width: 100px;
+        height: 100px;
+    }
+}
+
 .endpoint-setup {
     flex: 1;
     display: flex;
