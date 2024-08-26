@@ -45,7 +45,7 @@ function mostrarProductos(arrayProductos) {
 }
 
 function mostrarCategorias(arrayCategorias) {
-    if (Array.isArray(arrayCategorias) && arrayCategorias[0]?.categoria !== undefined) {
+    if (Array.isArray(arrayCategorias) && arrayCategorias.length > 0) {
         let spanCategorias = ''
         arrayCategorias.forEach((categoria)=> spanCategorias += retornarItemCategoria(categoria))
         seccionCategorias.innerHTML += spanCategorias
@@ -53,8 +53,10 @@ function mostrarCategorias(arrayCategorias) {
 }
 
 function recuperarCategorias(arrayProductos) {
-    const categoriasUnicas = new Set(...[arrayProductos.map((producto)=> producto.categoria)])
-    categorias.push(...categoriasUnicas)
+    if (arrayProductos?.categoria !== undefined) {
+        const categoriasUnicas = new Set(...[arrayProductos.map((producto)=> producto?.categoria)])
+        categorias.push(...categoriasUnicas)
+    }
 }
 
 // EVENTOS
