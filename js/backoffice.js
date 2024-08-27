@@ -34,6 +34,11 @@ function obtenerProductos() {
 function cargarProductos() {
     if (productos.length > 0) {
         let filaProductos = ''
+        tableBody.innerHTML = ''
+        console.table(productos)
+        console.log(tableBody)
+        console.log(filaProductos)
+
         productos.forEach((producto)=> filaProductos += retornarFilaProductosABM(producto) )
         if (filaProductos !== '') {
             tableBody.innerHTML = filaProductos
@@ -127,8 +132,8 @@ buttonGuardar.addEventListener('click', ()=> {
                 inputId.value = data.id
                 mostrarToast('success', 'Producto creado exitosamente.')
             })
+            .then(()=> obtenerProductos())
             .catch((error)=> alert(`⛔️ ${error.name}: ${error.message}`))
-            obtenerProductos()
             break
         }
         case 'edit': {
@@ -147,18 +152,18 @@ buttonGuardar.addEventListener('click', ()=> {
             })
             .then((data)=> {
                 mostrarToast('success', `Producto modificado exitosamente.`)
-            } )
+            })
+            .then(()=> obtenerProductos())
             .catch((error)=> {
                 alert(`⛔️ ${error.name}: ${error.message}`)
             })
-            obtenerProductos()
             break
         }
         default: {
             alert('🔔 No se entendió la operación a realizar.')
         }
     }
-    obtenerProductos()
+    // obtenerProductos()
 })
 
 buttonEliminar.addEventListener('click', ()=> {
