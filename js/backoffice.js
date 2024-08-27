@@ -163,7 +163,6 @@ buttonGuardar.addEventListener('click', ()=> {
             alert('🔔 No se entendió la operación a realizar.')
         }
     }
-    // obtenerProductos()
 })
 
 buttonEliminar.addEventListener('click', ()=> {
