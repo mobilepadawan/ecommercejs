@@ -40,3 +40,21 @@ export function retornarFilaCheckout(producto) {
                     title="Clic para eliminar">⛔️</td>
             </tr>`
 }
+
+export function retornarFilaProductosABM(producto) {
+    return `<tr data-filaCodigo="${producto.id}">
+                <td id="pImagen">${producto.imagen}</td>
+                <td id="nombre">${producto.nombre}</td>
+                <td id="price">${formatearImporte(producto.precio)}</td>
+                <td id="delButton" 
+                    data-codigo="${producto.id}" 
+                    title="Clic para eliminar">
+                    ⛔️
+                </td>
+                <td id="editButton" 
+                    data-codigo="${producto.id}" 
+                    title="Clic para Modificar">
+                    ✍️
+                </td>
+            </tr>`
+}

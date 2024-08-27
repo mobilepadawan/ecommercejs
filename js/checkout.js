@@ -1,6 +1,6 @@
 import { retornarFilaCheckout } from "./elements.js"
 import { mostrarToast } from "./general.js"
-import { recuperarCarrito, almacenarCarrito } from "./general.js"
+import { recuperarCarrito, almacenarCarrito, formatearImporte } from "./general.js"
 
 // VARIABLES
 const carrito = recuperarCarrito()
@@ -26,10 +26,10 @@ function cargarProductos() {
 
 function mostrarTotalCarrito() {
     let totalCarrito = 0
-
     totalCarrito = carrito.length > 0 ? carrito.reduce((acc, prod)=> acc + prod.precio, 0)
                                       : 0.00
-    precioTotal.textContent = `$ ${totalCarrito.toLocaleString('es-AR')}`
+
+    precioTotal.textContent = `${formatearImporte(totalCarrito)}`
 }
 
 cargarProductos() // FUNCIÓN PRINCIPAL

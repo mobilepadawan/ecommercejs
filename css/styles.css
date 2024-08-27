@@ -126,7 +126,116 @@ body {
         margin: 0 auto;
         width: 100px;
         height: 100px;
-    } 
+    }
+}
+
+.backoffice-products {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+dialog {
+    border: lightgray;
+    outline: none;
+    width: 80%;
+    height: 70%;
+    top: 10%;
+    padding: 40px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: fixed;
+
+    & h3 {
+        font-weight: 500;
+    }
+
+    p.mensaje {
+        color: rgba(211, 211, 211, 0.632);
+
+        & code {
+            padding: 6px;
+            margin-left: 4px;
+            margin-right: 4px;
+            border: 1px solid lightgray;
+            border-radius: 6px;
+            box-shadow: 
+            0px 4px 8px rgba(0, 0, 0, 0.3),
+            0px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    & input, select {
+        display: block;
+        margin-bottom: 20px;
+        outline: none;
+        font-size: 16px;
+        width: 300px;
+        max-width: 300px;
+        padding: 10px;
+        padding-left: 20px;
+        border: 1px solid #ddd;
+        background-color: #f4f4f4;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    }
+
+    & input#inputId {
+        max-width: 40px;
+    }
+
+    & input#inputImagen {
+        max-width: 70px;
+        height: 70px;
+        text-align: center;
+        font-size: 40px;
+    }
+
+    & input#inputPrecio {
+        max-width: 100px;
+        text-align: right;
+    }
+
+    & select {
+        width: 330px;
+        max-width: 330px;
+    }
+
+    & input::placeholder,
+      select::placeholder {
+        text-align: left !important;
+        opacity: .2;
+    }
+
+    & button {
+        position: relative;
+        border: 0;
+        padding: 12px;
+        width: 110px;
+        outline: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 6px;
+        padding-bottom: 10px;
+        background-color: green;
+    }
+
+    & button:hover {
+        filter: brightness(1.1);
+    }
+
+    & button:active {
+        filter: brightness(.95);
+        transform: scale(.98);
+    }
+}
+
+dialog::backdrop {
+    background: #333333bb;
 }
 
 .endpoint-setup {
@@ -194,78 +303,111 @@ body {
     justify-content: center;
     padding-top: 30px;
 
-    & h2 {
-        font-size: 20px;
-        font-weight: 400;
+        & h2 {
+            font-size: 20px;
+            font-weight: 400;
+        }
+}
+
+table {
+    padding-top: 20px;
+    
+    & thead tr {
+        background-color: #333;
+        color: whitesmoke;
+
+        & th {
+            padding: 10px;
+            font-weight: 500;
+        }
     }
 
-    & table {
-        padding-top: 20px;
-        
-        & thead tr {
-            background-color: #333;
-            color: whitesmoke;
-
-            & th {
+    & tbody {            
+        & tr {                            
+            & td#pImagen {
+                text-align: center;
+                font-size: 2rem;
                 padding: 10px;
+            } 
+
+            & td#nombre {
+                padding-left: 20px;
+                text-align: left;
+            }
+
+            & td#delButton,
+              td#editButton {
+                cursor: pointer;
+                text-align: center;
+                font-size: 1.5rem;
+            }
+
+            & td#price {
+                padding-right: 20px;
+                text-align: right;
+            }
+        }
+
+        & tr:hover {
+            background-color: #ffffff;
+        }
+
+        /* & tr:nth-child(odd) {
+            background-color: #f6f6f6;
+        }
+        
+        & tr:nth-child(even) {
+            background-color: #ffffff;
+        } */
+    }
+
+    & tfoot {            
+        & tr {
+            font-size: 20px;
+            font-weight: 600;
+
+            & td {
+                padding: 20px;
                 font-weight: 500;
             }
-        }
 
-        & tbody {            
-            & tr {                            
-                & td#pImagen {
-                    text-align: center;
-                    font-size: 2rem;
-                    padding: 10px;
-                } 
-    
-                & td#nombre {
-                    padding-left: 20px;
-                    text-align: left;
-                }
-    
-                & td#delButton {
-                    cursor: pointer;
-                    text-align: center;
-                    font-size: 1.5rem;
-                }
-    
-                & td#price {
-                    padding-right: 20px;
-                    text-align: right;
-                }
-            }
-
-            & tr:hover {
-                background-color: #ffffff;
-            }
-
-            /* & tr:nth-child(odd) {
-                background-color: #f6f6f6;
-            }
-            
-            & tr:nth-child(even) {
-                background-color: #ffffff;
-            } */
-
-        }
-
-        & tfoot {            
-            & tr {
-                font-size: 20px;
-                font-weight: 600;
-
-                & td {
-                    padding: 20px;
-                    font-weight: 500;
-                }
-
-                & td#totalPrice {
-                    text-align: right;
-                }
+            & td#totalPrice {
+                text-align: right;
             }
         }
+    }
+}
+
+.abm-controls {
+    padding: 20px;
+    margin: 0 auto;
+
+    & button {
+        border: 0;
+        margin: 20px;
+        padding: 12px;
+        width: 160px;
+        outline: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 6px;
+        padding-bottom: 10px;
+        font-weight: 200;
+        font-size: .7rem;
+        text-transform: uppercase;
+    }
+
+    & button:hover {
+        filter: brightness(1.1);
+    }
+
+    & button:active {
+        filter: brightness(.8);
+        transform: scale(.98);
+    }
+
+    & .btn-nuevo {
+        background-color: cornflowerblue;
     }
 }
 
@@ -498,14 +640,6 @@ footer {
     }
 }
 
-button:disabled,
-button:disabled:hover,
-button:disabled:active {
-    opacity: .5;
-    filter: brightness(1);
-    transform: scale(1);
-}
-
 .arrow-style {
     position: fixed;
     bottom: 10px;
@@ -518,6 +652,14 @@ button:disabled:active {
     & img {
         opacity: .4;
     }
+}
+
+button:disabled,
+button:disabled:hover,
+button:disabled:active {
+    opacity: .5;
+    filter: brightness(1);
+    transform: scale(1);
 }
 
 .hide-arrow {
