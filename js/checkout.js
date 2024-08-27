@@ -15,19 +15,18 @@ function cargarProductos() {
         let productos = ''
         carrito.forEach((producto)=> productos += retornarFilaCheckout(producto) )
         tableBody.innerHTML = productos || retornarFilaCheckout()
-        mostrarTotalCarrito()
         crearEventoClicEliminarProducto()
         btnComprar.removeAttribute('disabled')
     } else {
         tableBody.innerHTML = retornarFilaCheckout()
-        mostrarToast('alert', 'No hay productos para comprar.')
     }
+    mostrarTotalCarrito()
 }
 
 function mostrarTotalCarrito() {
     let totalCarrito = 0
-    totalCarrito = carrito.length > 0 ? carrito.reduce((acc, prod)=> acc + prod.precio, 0)
-                                      : 0.00
+    totalCarrito = carrito.length > 0 ? carrito.reduce((acc, prod)=> acc + parseFloat(prod.precio), 0)
+                                      : 0
 
     precioTotal.textContent = `${formatearImporte(totalCarrito)}`
 }

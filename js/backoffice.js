@@ -11,13 +11,14 @@ const inputPrecio = document.querySelector('input#inputPrecio')
 const selectCategoria = document.querySelector('select#selectCategoria')
 const buttonNuevo = document.querySelector('button.btn-nuevo')
 const buttonGuardar = document.querySelector('button#btnGuardar')
+const buttonEliminar = document.querySelector('button#btnEliminar')
 const tableBody = document.querySelector('table tbody#tableBody')
 const options = { method: '', headers: { 'Content-Type': 'application/json' }, body: '' }
 
 function obtenerProductos() {
     const url = obtenerURLendpoint()
     productos.length = 0
-
+    
     fetch(url)
     .then((response)=> {
         if (response.status === 200) return response.json()
@@ -53,24 +54,6 @@ function vaciarCamposABM() {
     selectCategoria.value = selectCategoria[0].value 
 }
 
-async function borrarProducto(prod) {
-    if (prod) {
-        abmStatus = 'delete'
-        options.method = 'DELETE'
-        options.body = ''
-        let URLdel = `${obtenerURLendpoint()}${'/'}${prod.id}`
-        const response = await fetch(URLdel, options)
-        if (response.ok) {
-            const data = await response.json()
-            mostrarToast('success', `${data.nombre} ha sido eliminado.`)
-            document.querySelector(`table tbody tr[data-filaCodigo="${prod.id}"]`).remove()
-        } else {
-
-            alert(`⛔️ ${error.name}: ${error.message}`)
-        }
-    }
-}
-
 function agregarEventoClickEditar() {
     const buttonsEditar = document.querySelectorAll('td#editButton')
 
@@ -78,12 +61,14 @@ function agregarEventoClickEditar() {
         buttonsEditar.forEach((boton)=> {
             boton.addEventListener('click', ()=> {
                 abmStatus = 'edit'
+                buttonEliminar.style.display = 'none'
+                buttonGuardar.style.display = 'block'            
                 let producto = productos.find((prod)=> prod.id === boton.dataset.codigo)
                 if (producto) {
                     inputId.value = producto.id
                     inputNombre.value = producto.nombre 
                     inputImagen.value = producto.imagen 
-                    inputPrecio.value = producto.precio 
+                    inputPrecio.value = parseFloat(producto.precio)
                     selectCategoria.value = producto?.categoria && producto.categoria
                     dialogABM.showModal()
                 }
@@ -92,24 +77,33 @@ function agregarEventoClickEditar() {
     }
 }
 
-async function agregarEventoClickBorrar() {
-    const buttonsBorrar = document.querySelectorAll('tbody tr td')
+function agregarEventoClickBorrar() {
+    const buttonsBorrar = document.querySelectorAll('tbody tr td#delButton')
 
     buttonsBorrar.forEach((btn)=> {
         btn.addEventListener('click', ()=> {
+            vaciarCamposABM()
+            dialogABM.showModal()
             let prod = productos.find((prod)=> prod.id === btn.dataset.codigo)
-            let mensaje = '¿Deseas eliminar el producto `' + prod.nombre + '`? \n\nEsta operación no podrá deshacerse.'
-            const respuesta = confirm(mensaje) 
-            if (respuesta) {
-                borrarProducto(prod)
-                return 0
-            }
+
+            inputId.value = prod.id
+            inputImagen.value = prod.imagen
+            inputNombre.value = prod.nombre
+            inputPrecio.value = prod.precio
+            selectCategoria.value = prod?.categoria || selectCategoria[0].value
+            buttonEliminar.style.display = 'block'
+            buttonGuardar.style.display = 'none'
+            abmStatus = 'delete'
+            console.log(abmStatus)
+            return 0
         } )
     })
 }
 
 buttonNuevo.addEventListener('click', ()=> {
     abmStatus = 'new'
+    buttonEliminar.style.display = 'none'
+    buttonGuardar.style.display = 'block'
     vaciarCamposABM()
     dialogABM.showModal()
 })
@@ -122,7 +116,7 @@ buttonGuardar.addEventListener('click', ()=> {
             options.body = JSON.stringify({
                 nombre: inputNombre.value.trim(),
                 imagen: inputImagen.value.trim(),
-                precio: inputPrecio.value
+                precio: parseFloat(inputPrecio.precio)
             })
             fetch(obtenerURLendpoint(), options)
             .then((response)=> {
@@ -133,7 +127,8 @@ buttonGuardar.addEventListener('click', ()=> {
                 inputId.value = data.id
                 mostrarToast('success', 'Producto creado exitosamente.')
             })
-            .catch((error)=> alert(`⛔️ ${error.name}: ${error.message}`) )
+            .catch((error)=> alert(`⛔️ ${error.name}: ${error.message}`))
+            obtenerProductos()
             break
         }
         case 'edit': {
@@ -142,7 +137,7 @@ buttonGuardar.addEventListener('click', ()=> {
             {
                 nombre: inputNombre.value,
                 imagen: inputImagen.value,
-                precio: inputPrecio.value
+                precio: parseFloat(inputPrecio.value)
             })
             let URLput = `${obtenerURLendpoint()}${'/'}${inputId.value}`
             fetch(URLput, options)
@@ -155,7 +150,8 @@ buttonGuardar.addEventListener('click', ()=> {
             } )
             .catch((error)=> {
                 alert(`⛔️ ${error.name}: ${error.message}`)
-            } )
+            })
+            obtenerProductos()
             break
         }
         default: {
@@ -163,4 +159,26 @@ buttonGuardar.addEventListener('click', ()=> {
         }
     }
     obtenerProductos()
+})
+
+buttonEliminar.addEventListener('click', ()=> {
+    if (abmStatus === 'delete' && inputId.value !== '') {
+        options.method = 'DELETE'
+        options.body = ''
+        let URLdelete = `${obtenerURLendpoint()}${'/'}${inputId.value}`
+        fetch(URLdelete, options)
+        .then((response)=> {
+            if (response.status === 200) return response.json()
+            else throw new Error('⛔️ Error en la eliminación del producto.')
+        })
+        .then((data)=> {
+            mostrarToast('success', `${data.nombre} ha sido eliminado.`)
+            document.querySelector(`table tbody tr[data-filaCodigo="${inputId.value}"]`).remove()
+            vaciarCamposABM()
+        } )
+        .catch((error)=> {
+            alert(`⛔️ ${error.name}: ${error.message}`)
+        } )
+        obtenerProductos()
+    }
 })

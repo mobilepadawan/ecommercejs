@@ -140,7 +140,7 @@ body {
 dialog {
     border: lightgray;
     outline: none;
-    width: 80%;
+    width: 40%;
     height: 70%;
     top: 10%;
     padding: 40px;
@@ -215,13 +215,21 @@ dialog {
         position: relative;
         border: 0;
         padding: 12px;
-        width: 110px;
         outline: none;
         color: white;
         cursor: pointer;
         border-radius: 6px;
         padding-bottom: 10px;
+    }
+
+    & button#btnGuardar {
+        width: 110px;
         background-color: green;
+    }
+
+    & button#btnEliminar {
+        width: 160px;
+        background-color: darkred;
     }
 
     & button:hover {
@@ -311,12 +319,15 @@ dialog::backdrop {
 
 table {
     padding-top: 20px;
+    border-collapse: collapse;
     
     & thead tr {
         background-color: #333;
         color: whitesmoke;
 
         & th {
+            border-width: 0px;
+            border-style: none;
             padding: 10px;
             font-weight: 500;
         }
