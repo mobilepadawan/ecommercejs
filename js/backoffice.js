@@ -116,7 +116,7 @@ buttonGuardar.addEventListener('click', ()=> {
             options.body = JSON.stringify({
                 nombre: inputNombre.value.trim(),
                 imagen: inputImagen.value.trim(),
-                precio: parseFloat(inputPrecio.precio)
+                precio: parseFloat(inputPrecio.value)
             })
             fetch(obtenerURLendpoint(), options)
             .then((response)=> {
