@@ -20,13 +20,16 @@ function obtenerProductos() {
         fetch(URLproductos)
         .then((response)=> {
             if (response.status === 200) return response.json()
-            else throw new Error('Error al obtener productos: ' + response.status)
+            else throw new Error('Error al obtener productos: (' + response.status + ')')
         })
         .then((data)=> productos.push(...data))
         .then(()=> recuperarCategorias(productos))
         .then(()=> mostrarCategorias(categorias))
         .then(()=> mostrarProductos(productos))
-        .catch((err)=> container.innerHTML = retornarCardError())
+        .catch((err)=> {
+            container.innerHTML = retornarCardError()
+            mostrarToast('error', `${err.message}`)
+        })
     }
 }
 
@@ -65,7 +68,7 @@ buttonCarrito.addEventListener('mouseover', ()=> {
 
 buttonCarrito.addEventListener('click', ()=> {
     carrito.length > 0 ? location.href = 'checkout.html'
-                       : alert('No hay productos en el carrito para comprar.')
+                       : mostrarToast('alert', '🛒 Carrito sin productos.')
 })
 
 inputSearch.addEventListener('keydown', (e)=> {
@@ -74,7 +77,7 @@ inputSearch.addEventListener('keydown', (e)=> {
     if (e.key === 'Enter' && nombreAbuscar !== '') {        
         let arrayResultado = productos.filter((producto)=> producto.nombre.toLowerCase().includes(nombreAbuscar))
         arrayResultado.length > 0 ? mostrarProductos(arrayResultado)
-                                  : mostrarToast('alert', 'No se encontraron resultados.')
+                                  : mostrarToast('alert', '🔎 No se encontraron resultados.')
         arrayResultado = null
     }
 })
