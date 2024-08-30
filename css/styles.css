@@ -138,13 +138,14 @@ body {
 }
 
 dialog {
-    border: lightgray;
     outline: none;
     width: 40%;
     height: 70%;
     top: 10%;
     padding: 40px;
     background: white;
+    border: lightgray;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     position: fixed;
