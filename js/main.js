@@ -12,7 +12,7 @@ const buttonCarrito = document.querySelector('div.shoping-cart')
 const inputSearch = document.querySelector('input#inputSearch')
 const arrowUp = document.querySelector('div.arrow-style')
 
-// LÒGICA
+// LÓGICA
 function obtenerProductos() {
     let URLproductos = obtenerURLendpoint()
 
@@ -27,8 +27,8 @@ function obtenerProductos() {
         .then(()=> mostrarCategorias(categorias))
         .then(()=> mostrarProductos(productos))
         .catch((err)=> {
-            container.innerHTML = retornarCardError()
             mostrarToast('error', `${err.message}`)
+            container.innerHTML = retornarCardError()
         })
     }
 }
@@ -73,7 +73,6 @@ buttonCarrito.addEventListener('click', ()=> {
 
 inputSearch.addEventListener('keydown', (e)=> {
     let nombreAbuscar = inputSearch.value.trim().toLowerCase()
-
     if (e.key === 'Enter' && nombreAbuscar !== '') {        
         let arrayResultado = productos.filter((producto)=> producto.nombre.toLowerCase().includes(nombreAbuscar))
         arrayResultado.length > 0 ? mostrarProductos(arrayResultado)
@@ -119,14 +118,11 @@ function agregarClicEnBotones() {
     }
 }
 
-document.addEventListener('scroll', ()=> {
-        window.scrollY > 115 ? arrowUp.classList.remove('hide-arrow')
-                             : arrowUp.classList.add('hide-arrow')
-})
+document.addEventListener('scroll', ()=> window.scrollY > 115 ? 
+                                         arrowUp.classList.remove('hide-arrow') : 
+                                         arrowUp.classList.add('hide-arrow') )
 
-arrowUp.addEventListener('click', ()=> {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-})
+arrowUp.addEventListener('click', ()=> window.scrollTo({ top: 0, behavior: 'smooth' }) )
 
 //FUNCIÓN PRINCIPAL
 obtenerProductos()

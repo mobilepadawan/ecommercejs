@@ -24,7 +24,6 @@ export default class ToastIt {
                 break;
             default:
                 this.style = 'toast-generic';
-                break;
         }
 
         this.closeButton = close ? true : false;
@@ -53,7 +52,6 @@ export default class ToastIt {
             default: // 'right' (default behavior)
                 topOffset = `${20 + existingToastsCount * (40 + 20)}px`;
                 divToast.style.right = '20px';
-                break;
         }
         divToast.style.top = topOffset;
 
@@ -67,12 +65,8 @@ export default class ToastIt {
         }
 
         const dialogOpened = document.querySelector('dialog[open]');
-
-        if (dialogOpened) {
-            document.querySelector('dialog[open]').insertAdjacentElement('beforeend', divToast)
-        } else {
-            document.querySelector('body').insertAdjacentElement('beforebegin', divToast);
-        }
+        dialogOpened ? document.querySelector('dialog[open]').insertAdjacentElement('beforeend', divToast)
+                     : document.querySelector('body').insertAdjacentElement('beforebegin', divToast);
         divToast.style.textAlign = 'justify !important';
 
         let i = 0;
@@ -108,7 +102,6 @@ export default class ToastIt {
                 break;
             default:
                 return 'Default text message';
-                break;
         }
     }
 

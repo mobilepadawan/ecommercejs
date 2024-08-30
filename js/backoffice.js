@@ -22,7 +22,7 @@ function obtenerProductos() {
     fetch(url)
     .then((response)=> {
         if (response.status === 200) return response.json()
-        else throw new Error('⛔️ No se puede acceder a los productos.')
+        else throw new Error(`⛔️ No encontramos productos (${response.status})`)
     })
     .then((data)=> productos.push(...data))
     .then(()=> cargarProductos())
@@ -35,10 +35,6 @@ function cargarProductos() {
     if (productos.length > 0) {
         let filaProductos = ''
         tableBody.innerHTML = ''
-        console.table(productos)
-        console.log(tableBody)
-        console.log(filaProductos)
-
         productos.forEach((producto)=> filaProductos += retornarFilaProductosABM(producto) )
         if (filaProductos !== '') {
             tableBody.innerHTML = filaProductos
@@ -90,7 +86,6 @@ function agregarEventoClickBorrar() {
             vaciarCamposABM()
             dialogABM.showModal()
             let prod = productos.find((prod)=> prod.id === btn.dataset.codigo)
-
             inputId.value = prod.id
             inputImagen.value = prod.imagen
             inputNombre.value = prod.nombre
@@ -121,19 +116,19 @@ buttonGuardar.addEventListener('click', ()=> {
             options.body = JSON.stringify({
                 nombre: inputNombre.value.trim(),
                 imagen: inputImagen.value.trim(),
-                precio: parseFloat(inputPrecio.value)
+                precio: parseFloat((Number(inputPrecio.value)).toFixed(2))
             })
             fetch(obtenerURLendpoint(), options)
             .then((response)=> {
                 if (response.status === 201) return response.json()
-                else throw new Error('⛔️ Error en el alta de producto.')
+                else throw new Error(`⛔️ Error en el alta de producto (${response.status})`)
             })
             .then((data)=> {
                 inputId.value = data.id
                 mostrarToast('success', 'Producto creado exitosamente.')
             })
             .then(()=> obtenerProductos())
-            .catch((error)=> alert(`⛔️ ${error.name}: ${error.message}`))
+            .catch((error)=> mostrarToast('error', `${error.message}`))
             break
         }
         case 'edit': {
@@ -154,14 +149,10 @@ buttonGuardar.addEventListener('click', ()=> {
                 mostrarToast('success', `Producto modificado exitosamente.`)
             })
             .then(()=> obtenerProductos())
-            .catch((error)=> {
-                alert(`⛔️ ${error.name}: ${error.message}`)
-            })
+            .catch((error)=> mostrarToast('error', `${error.message}`) )
             break
         }
-        default: {
-            alert('🔔 No se entendió la operación a realizar.')
-        }
+        default: mostrarToast('info', `No comprendimos la operación indicada.`)
     }
 })
 
@@ -173,7 +164,7 @@ buttonEliminar.addEventListener('click', ()=> {
         fetch(URLdelete, options)
         .then((response)=> {
             if (response.status === 200) return response.json()
-            else throw new Error('⛔️ Error en la eliminación del producto.')
+            else throw new Error(`⛔️ Error al eliminar el producto (${response.status})`)
         })
         .then((data)=> {
             mostrarToast('success', `${data.nombre} ha sido eliminado.`)
@@ -181,7 +172,7 @@ buttonEliminar.addEventListener('click', ()=> {
             vaciarCamposABM()
         } )
         .catch((error)=> {
-            alert(`⛔️ ${error.name}: ${error.message}`)
+            mostrarToast('error', `${error.message}`)
         } )
         obtenerProductos()
     }

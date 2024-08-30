@@ -42,7 +42,7 @@ function crearEventoClicEliminarProducto() {
                 let codigo = button.dataset.codigo
                 let indice = carrito.findIndex((prod)=> prod.id === codigo)
                 carrito.splice(indice, 1)
-                mostrarToast('alert', 'Producto eliminado del carrito')
+                mostrarToast('alert', 'Producto quitado del carrito')
                 almacenarCarrito(carrito)
                 cargarProductos()
             })
