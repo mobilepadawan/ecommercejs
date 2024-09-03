@@ -347,30 +347,28 @@ table {
                 text-align: left;
             }
 
+            
+            & td#price {
+                padding-right: 20px;
+                text-align: right;
+            }
+
+            & td#categoria {
+                padding-right: 20px;
+                text-align: center;
+            }
+
             & td#delButton,
               td#editButton {
                 cursor: pointer;
                 text-align: center;
                 font-size: 1.5rem;
             }
-
-            & td#price {
-                padding-right: 20px;
-                text-align: right;
-            }
         }
 
         & tr:hover {
             background-color: #ffffff;
         }
-
-        /* & tr:nth-child(odd) {
-            background-color: #f6f6f6;
-        }
-        
-        & tr:nth-child(even) {
-            background-color: #ffffff;
-        } */
     }
 
     & tfoot {            
