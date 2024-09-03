@@ -111,13 +111,13 @@ buttonNuevo.addEventListener('keydown', (e)=> e.key === 'Esc' && dialogABM.close
 
 buttonGuardar.addEventListener('click', ()=> {
 
-    const datosFaltantes = (selectCategoria.value = 'Selecciona una opción...' 
+    const datosFaltantes = (selectCategoria.value === 'Selecciona una opción...' 
                             || inputNombre.value.trim() === '' 
                             || inputImagen.value === '' 
                             || inputPrecio.value <= '0')
 
     if (datosFaltantes) {
-        mostrarToast('alerta', 'Complete todos los datos para continuar.')
+        mostrarToast('alert', 'Complete todos los datos para continuar.')
         return
     }
 
