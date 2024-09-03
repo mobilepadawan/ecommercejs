@@ -110,13 +110,25 @@ buttonNuevo.addEventListener('click', ()=> {
 buttonNuevo.addEventListener('keydown', (e)=> e.key === 'Esc' && dialogABM.close() )
 
 buttonGuardar.addEventListener('click', ()=> {
+
+    const datosFaltantes = (selectCategoria.value = 'Selecciona una opción...' 
+                            || inputNombre.value.trim() === '' 
+                            || inputImagen.value === '' 
+                            || inputPrecio.value <= '0')
+
+    if (datosFaltantes) {
+        mostrarToast('alerta', 'Complete todos los datos para continuar.')
+        return
+    }
+
     switch(abmStatus) {
         case 'new': {
             options.method = 'POST'
             options.body = JSON.stringify({
                 nombre: inputNombre.value.trim(),
                 imagen: inputImagen.value.trim(),
-                precio: parseFloat((Number(inputPrecio.value)).toFixed(2))
+                precio: parseFloat((Number(inputPrecio.value)).toFixed(2)),
+                categoria: selectCategoria.value
             })
             fetch(obtenerURLendpoint(), options)
             .then((response)=> {
@@ -137,7 +149,8 @@ buttonGuardar.addEventListener('click', ()=> {
             {
                 nombre: inputNombre.value,
                 imagen: inputImagen.value,
-                precio: parseFloat(inputPrecio.value)
+                precio: parseFloat(inputPrecio.value),
+                categoria: selectCategoria.value
             })
             let URLput = `${obtenerURLendpoint()}${'/'}${inputId.value}`
             fetch(URLput, options)
@@ -175,5 +188,7 @@ buttonEliminar.addEventListener('click', ()=> {
             mostrarToast('error', `${error.message}`)
         } )
         obtenerProductos()
+    } else {
+        mostrarToast('alert', `Falta el ID de producto a eliminar.`)
     }
 })
