@@ -1,18 +1,21 @@
 // IMPORTS
-import { retornarCardHTML, retornarCardError, retornarItemCategoria } from './elements.js'
-import { obtenerURLendpoint, validarURL, almacenarCarrito, recuperarCarrito, mostrarToast } from './general.js'
+import { retornarCardHTML, retornarCardError, retornarItemCategoria, retornarFooter } from './elements.js'
+import { obtenerURLendpoint, validarURL, almacenarCarrito, recuperarCarrito, mostrarToast, dom } from './general.js'
 
 // DOM: enlaces y variables globales
 const categorias = []
 const productos = []
 const carrito = recuperarCarrito()
-const seccionCategorias = document.querySelector('article.categories')
-const container = document.querySelector('div.card-container')
-const buttonCarrito = document.querySelector('div.shoping-cart')
-const inputSearch = document.querySelector('input#inputSearch')
-const arrowUp = document.querySelector('div.arrow-style')
+const seccionCategorias = dom('article.categories')
+const container = dom('div.card-container')
+const footer = dom('footer')
+const buttonCarrito = dom('div.shoping-cart')
+const inputSearch = dom('input#inputSearch')
+const arrowUp = dom('div.arrow-style')
 
 // LÓGICA
+footer.innerHTML = retornarFooter('backoffice', 'setup')
+
 function obtenerProductos() {
     let URLproductos = obtenerURLendpoint()
 

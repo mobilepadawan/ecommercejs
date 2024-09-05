@@ -1,9 +1,13 @@
+import { retornarFooter } from './elements.js'
 import { mostrarToast, guardarURLendpoint, 
-         obtenerURLendpoint, validarURL } from './general.js'
+         obtenerURLendpoint, validarURL, 
+         dom} from './general.js'
 
-const buttonGuardar = document.querySelector('div.endpoint-setup button')
-const inputURL = document.querySelector('input#inputURL')
+const buttonGuardar = dom('div.endpoint-setup button')
+const inputURL = dom('input#inputURL')
+const footer = dom('footer')
 
+footer.innerHTML = retornarFooter('index', 'backoffice')
 inputURL.value = obtenerURLendpoint() || ''
 
 buttonGuardar.addEventListener('click', ()=> {

@@ -1,18 +1,19 @@
-import { retornarFilaProductosABM } from "./elements.js"
-import { obtenerURLendpoint, mostrarToast } from "./general.js"
+import { retornarFilaProductosABM, retornarFooter } from "./elements.js"
+import { obtenerURLendpoint, mostrarToast, dom } from "./general.js"
 
 let abmStatus = ''
 const productos = []
-const dialogABM = document.querySelector('dialog')
-const inputId = document.querySelector('input#inputId')
-const inputImagen = document.querySelector('input#inputImagen')
-const inputNombre = document.querySelector('input#inputNombre')
-const inputPrecio = document.querySelector('input#inputPrecio')
-const selectCategoria = document.querySelector('select#selectCategoria')
-const buttonNuevo = document.querySelector('button.btn-nuevo')
-const buttonGuardar = document.querySelector('button#btnGuardar')
-const buttonEliminar = document.querySelector('button#btnEliminar')
-const tableBody = document.querySelector('table tbody#tableBody')
+const dialogABM = dom('dialog')
+const inputId = dom('input#inputId')
+const inputImagen = dom('input#inputImagen')
+const inputNombre = dom('input#inputNombre')
+const inputPrecio = dom('input#inputPrecio')
+const selectCategoria = dom('select#selectCategoria')
+const buttonNuevo = dom('button.btn-nuevo')
+const buttonGuardar = dom('button#btnGuardar')
+const buttonEliminar = dom('button#btnEliminar')
+const tableBody = dom('table tbody#tableBody')
+const footer = dom('footer')
 const options = { method: '', headers: { 'Content-Type': 'application/json' }, body: '' }
 
 function obtenerProductos() {
@@ -45,6 +46,7 @@ function cargarProductos() {
 }
 
 obtenerProductos() // FUNCIÓN PRINCIPAL
+footer.innerHTML = retornarFooter('index', 'setup')
 
 // EVENTOS
 function vaciarCamposABM() {

@@ -1,13 +1,14 @@
-import { retornarFilaCheckout } from "./elements.js"
-import { mostrarToast } from "./general.js"
+import { retornarFilaCheckout, retornarFooter } from "./elements.js"
+import { dom, mostrarToast } from "./general.js"
 import { recuperarCarrito, almacenarCarrito, formatearImporte } from "./general.js"
 
 // VARIABLES
 const carrito = recuperarCarrito()
-const precioTotal = document.querySelector('table tfoot td#totalPrice')
-const btnComprar = document.querySelector('button#btnBuy')
-const btnRetornar = document.querySelector('button#btnReturn')
-const tableBody = document.querySelector('table tbody#tableBody')
+const precioTotal = dom('table tfoot td#totalPrice')
+const btnComprar = dom('button#btnBuy')
+const btnRetornar = dom('button#btnReturn')
+const tableBody = dom('table tbody#tableBody')
+const footer = dom('footer')
 
 // LÓGICA
 function cargarProductos() {
@@ -22,6 +23,7 @@ function cargarProductos() {
     }
     mostrarTotalCarrito()
 }
+footer.innerHTML = retornarFooter('backoffice', 'setup')
 
 function mostrarTotalCarrito() {
     let totalCarrito = 0

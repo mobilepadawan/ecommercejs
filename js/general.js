@@ -47,3 +47,7 @@ export function mostrarToast(estilo, mensaje) {
         message: mensaje
     })
 }
+
+export function dom(el) {
+    return document.querySelector(el)
+}
