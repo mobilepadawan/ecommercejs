@@ -54,10 +54,12 @@ body {
 }
 
 .categories {
-    flex: 1;
-    gap: 30px;
+    gap: 10px;
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
+    align-content: space-between;
     padding-top: 40px;
 
     & span {
