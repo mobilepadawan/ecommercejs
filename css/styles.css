@@ -123,12 +123,6 @@ body {
     text-align: center;
     width: 100%;
     height: 400px;
-
-    & img {
-        margin: 0 auto;
-        width: 100px;
-        height: 100px;
-    }
 }
 
 .backoffice-products {
@@ -686,6 +680,28 @@ button:disabled:active {
 
 .hide-arrow {
     opacity: 0;
+}
+
+.spinner {
+    margin: 0 auto;
+    border: 4px solid rgba(0, 0, 0, .1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: cornflowerblue;
+    border-right-color: orangered;
+    border-top-color: yellowgreen;
+    border-bottom-color: lightsalmon;
+
+    animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    } 100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media (max-width: 480px) {
