@@ -1,11 +1,16 @@
 // IMPORTS
-import { retornarCardHTML, retornarCardError, retornarItemCategoria, retornarFooter } from './elements.js'
-import { obtenerURLendpoint, validarURL, almacenarCarrito, recuperarCarrito, mostrarToast, dom } from './general.js'
-
+import { retornarCardHTML, retornarCardError, 
+         retornarItemCategoria, retornarFooter } from './elements.js'
+import { obtenerURLendpoint, validarURL, almacenarCarrito, 
+         recuperarCarrito, mostrarToast, dom,
+         retornarConfiguracionEntorno } from './general.js'
+ 
 // DOM: enlaces y variables globales
 const categorias = []
 const productos = []
+let URLproductos = ''
 const carrito = recuperarCarrito()
+const setup = retornarConfiguracionEntorno()
 const seccionCategorias = dom('article.categories')
 const container = dom('div.card-container')
 const footer = dom('footer')
@@ -15,9 +20,19 @@ const arrowUp = dom('div.arrow-style')
 
 // LÓGICA
 footer.innerHTML = retornarFooter('backoffice', 'setup')
+console.log(dom('title').textContent)
+
+function configurarEntorno() {
+    if (setup !== null) {
+        dom('h1').textContent = setup.ecommerceTitle
+        dom('h2').textContent = setup.sloganTitle
+        dom('title').textContent = setup.tabTitle
+        URLproductos = setup.urlEndpoint || 'Error'
+    }
+}
 
 function obtenerProductos() {
-    let URLproductos = obtenerURLendpoint()
+    // let URLproductos = obtenerURLendpoint()
 
     if (validarURL(URLproductos)) {
         fetch(URLproductos)
@@ -128,4 +143,5 @@ document.addEventListener('scroll', ()=> window.scrollY > 115 ?
 arrowUp.addEventListener('click', ()=> window.scrollTo({ top: 0, behavior: 'smooth' }) )
 
 //FUNCIÓN PRINCIPAL
+configurarEntorno()
 obtenerProductos()

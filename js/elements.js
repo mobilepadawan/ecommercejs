@@ -62,7 +62,7 @@ export function retornarFilaProductosABM(producto) {
 
 export function retornarFooter(page1, page2) {
     return `<div class="footer">
-                <h3>Copyright © 2023 - <span>${new Date().getFullYear()}</span> | Fernando Luna para Teclab</h3>
+                <h3>Copyright © 2023 - <span>${new Date().getFullYear()}</span> | Fernando Luna para ISTEA</h3>
                 <div class="links">
                     <a href="${page1}.html">${page1.toUpperCase()}</a>
                     <a href="${page2}.html">${page2.toUpperCase()}</a>

@@ -1,6 +1,7 @@
 import { retornarFilaCheckout, retornarFooter } from "./elements.js"
 import { dom, mostrarToast } from "./general.js"
-import { recuperarCarrito, almacenarCarrito, formatearImporte } from "./general.js"
+import { recuperarCarrito, almacenarCarrito, 
+         formatearImporte } from "./general.js"
 
 // VARIABLES
 const carrito = recuperarCarrito()
@@ -38,6 +39,7 @@ cargarProductos() // FUNCIÓN PRINCIPAL
 // EVENTOS
 function crearEventoClicEliminarProducto() {
     const buttonsEliminar = document.querySelectorAll('table tbody tr td#delButton')
+    
     if (buttonsEliminar.length > 0) {
         buttonsEliminar.forEach((button)=> {
             button.addEventListener('click', ()=> {

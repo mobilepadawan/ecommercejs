@@ -1,8 +1,11 @@
 import { retornarFilaProductosABM, retornarFooter } from "./elements.js"
-import { obtenerURLendpoint, mostrarToast, dom } from "./general.js"
+import { obtenerURLendpoint, mostrarToast, dom,
+         retornarConfiguracionEntorno } from "./general.js"
 
 let abmStatus = ''
+let URLproductos = ''
 const productos = []
+const setup = retornarConfiguracionEntorno()
 const dialogABM = dom('dialog')
 const inputId = dom('input#inputId')
 const inputImagen = dom('input#inputImagen')
@@ -15,6 +18,15 @@ const buttonEliminar = dom('button#btnEliminar')
 const tableBody = dom('table tbody#tableBody')
 const footer = dom('footer')
 const options = { method: '', headers: { 'Content-Type': 'application/json' }, body: '' }
+
+function configurarEntorno() {
+    if (setup !== null) {
+        dom('h1').textContent = setup.ecommerceTitle
+        dom('h2').textContent = setup.sloganTitle
+        dom('title').textContent = setup.tabTitle + ' | Backoffice'
+        URLproductos = setup.urlEndpoint || 'Error'
+    }
+}
 
 function obtenerProductos() {
     const url = obtenerURLendpoint()
@@ -45,7 +57,9 @@ function cargarProductos() {
     }
 }
 
-obtenerProductos() // FUNCIÓN PRINCIPAL
+// FUNCIONES PRINCPALES
+configurarEntorno()
+obtenerProductos()
 footer.innerHTML = retornarFooter('index', 'setup')
 
 // EVENTOS

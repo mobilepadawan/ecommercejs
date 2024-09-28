@@ -1,4 +1,4 @@
-import ToastIt from './toastitv1.0-min.js'
+import ToastIt from './toastitv1.0.min.js'
 
 export function formatearImporte(valor) {
     const opciones = {
@@ -50,4 +50,24 @@ export function mostrarToast(estilo, mensaje) {
 
 export function dom(el) {
     return document.querySelector(el)
+} 
+
+export function retornarConfiguracionEntorno() {
+    const setup = {
+        tabTitle: localStorage.getItem('inputTabTitle') || 'Ecommerce',
+        urlEndpoint: localStorage.getItem('inputURL') || 'Error',
+        ecommerceTitle: localStorage.getItem('inputEcommerceTitle') || 'Configura tu Ecommerce',
+        sloganTitle: localStorage.getItem('inputSloganTitle') || 'Configura el slogan de tu tienda de ecommerce'
+    }
+    return setup || null
+}
+
+export function guardarConfiguracionEntorno() {
+    const ls = localStorage
+    const d = document.querySelector
+
+    ls.setItem('inputURL', document.querySelector('#inputURL').value.trim())
+    ls.setItem('inputTabTitle', document.querySelector('#inputTabTitle').value.trim())
+    ls.setItem('inputEcommerceTitle', document.querySelector('#inputEcommerceTitle').value.trim())
+    ls.setItem('inputSloganTitle', document.querySelector('#inputSloganTitle').value.trim())
 }
