@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-
+@import url('toastitv1.0.modern.min.css');
 body {
     user-select: none;
     margin: 0;
@@ -135,7 +135,8 @@ body {
 
 dialog {
     outline: none;
-    width: 40%;
+    /* width: 40%; */
+    max-width: clamp();
     height: 70%;
     top: 10%;
     padding: 40px;
@@ -477,6 +478,14 @@ table {
     padding-top: 40px;
     padding-right: 20%;
     padding-left: 20%;
+
+    & #config-message {
+        text-align: center;
+        color: darkred;
+        font-weight: 500;
+        text-wrap: pretty;
+        line-height: 2rem;
+    }
 }
 
 .card-error {
