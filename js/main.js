@@ -20,14 +20,18 @@ const arrowUp = dom('div.arrow-style')
 
 // LÓGICA
 footer.innerHTML = retornarFooter('backoffice', 'setup')
-console.log(dom('title').textContent)
 
 function configurarEntorno() {
-    if (setup !== null) {
-        dom('h1').textContent = setup.ecommerceTitle
-        dom('h2').textContent = setup.sloganTitle
-        dom('title').textContent = setup.tabTitle
-        URLproductos = setup.urlEndpoint || 'Error'
+    try {
+        if (setup !== null) {
+            dom('h1').textContent = setup.ecommerceTitle
+            dom('h2').textContent = setup.sloganTitle
+            dom('title').textContent = setup.tabTitle
+            URLproductos = setup.urlEndpoint || localStorage.getItem('URLEndpoint') || 'Error'
+        }    
+    } catch(error) {
+        console.error(error.message)
+        URLproductos = localStorage.getItem('URLEndpoint')
     }
 }
 

@@ -20,19 +20,25 @@ const footer = dom('footer')
 const options = { method: '', headers: { 'Content-Type': 'application/json' }, body: '' }
 
 function configurarEntorno() {
-    if (setup !== null) {
-        dom('h1').textContent = setup.ecommerceTitle
-        dom('h2').textContent = setup.sloganTitle
-        dom('title').textContent = setup.tabTitle + ' | Backoffice'
-        URLproductos = setup.urlEndpoint || 'Error'
+    try {
+        if (setup !== null) {
+            dom('h1').textContent = setup.ecommerceTitle
+            dom('h2').textContent = setup.sloganTitle
+            dom('title').textContent = setup.tabTitle + ' | Backoffice'
+            URLproductos = setup.urlEndpoint || localStorage.getItem('URLEndpoint') || 'Error'
+        }
+    } catch (error) {
+        console.error(error)
+        URLproductos = localStorage.getItem('URLEndpoint')
     }
+
 }
 
 function obtenerProductos() {
-    const url = obtenerURLendpoint()
+    // const url = obtenerURLendpoint()
     productos.length = 0
     
-    fetch(url)
+    fetch(URLproductos)
     .then((response)=> {
         if (response.status === 200) return response.json()
         else throw new Error(`⛔️ No encontramos productos (${response.status})`)
